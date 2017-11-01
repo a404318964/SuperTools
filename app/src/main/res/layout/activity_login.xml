@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relay_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity">
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.zwj.customview.ShapedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_login_avator"
+            android:layout_width="230px"
+            android:layout_height="230px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="150px"
+            android:src="@mipmap/ic_launcher"
+            app:layout_auto_basewidth="height"
+            app:shape_mode="circle" />
+
+        <LinearLayout
+            android:id="@+id/ll_account"
+            style="@style/LoginItemStyle">
+
+            <TextView
+                android:id="@+id/account_tip"
+                style="@style/TextSize48AndColor333333Style"
+                android:layout_marginRight="90px"
+                android:text="账号" />
+
+            <com.zwj.customview.ClearWriteEditText
+                android:id="@+id/et_account"
+                style="@style/ClearWriteEditTextStyle"
+                android:hint="请输入账号或手机号"
+                android:maxLines="1"
+                android:paddingBottom="0px"
+                android:paddingTop="0px" />
+
+        </LinearLayout>
+
+        <View style="@style/HorizontalLineViewStyle" />
+
+        <LinearLayout
+            android:id="@+id/ll_password"
+            style="@style/LoginItemStyle"
+            android:layout_marginTop="50px">
+
+            <TextView
+                style="@style/TextSize48AndColor333333Style"
+                android:layout_marginRight="90px"
+                android:text="密码" />
+
+            <com.zwj.customview.ClearWriteEditText
+                android:id="@+id/et_password"
+                style="@style/ClearWriteEditTextStyle"
+                android:digits="@string/filter_code"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingBottom="0px"
+                android:paddingTop="0px" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line_password"
+            style="@style/HorizontalLineViewStyle" />
+
+        <LinearLayout
+            android:id="@+id/ll_validcode"
+            style="@style/LoginItemStyle"
+            android:layout_marginTop="50px"
+            android:visibility="gone">
+
+            <com.zwj.customview.ClearWriteEditText
+                android:id="@+id/et_valid_code"
+                android:layout_width="570px"
+                android:layout_height="120px"
+                style="@style/TextSize48AndColor333333Style"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:drawablePadding="3dip"
+                android:hint="@string/code"
+                android:inputType="number"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:textColorHint="@color/text_mainbody_color_666666"/>
+
+            <Button
+                android:id="@+id/btn_get_validcode"
+                android:layout_width="270px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="60px"
+                android:background="@drawable/rs_select_btn_blue"
+                android:clickable="false"
+                android:minHeight="1dp"
+                android:minWidth="1dp"
+                android:paddingBottom="24px"
+                android:paddingTop="24px"
+                android:text="@string/send_code"
+                android:textColor="#FFF"
+                android:textSize="36px" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line_validcode"
+            style="@style/HorizontalLineViewStyle"
+            android:layout_width="570px"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px"
+            android:layout_marginTop="100px"
+            android:background="@drawable/rs_select_btn_blue"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_48" />
+
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_login_change"-->
+        <!--style="@style/ClearWriteEditTextStyle"-->
+        <!--android:layout_below="@id/ll_top"-->
+        <!--android:padding="45px"-->
+        <!--android:text="验证码登录" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_register"-->
+        <!--style="@style/TextSize48AndColor666666Style"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@id/ll_top"-->
+        <!--android:padding="45px"-->
+        <!--android:text="@string/new_user" />-->
+
+</RelativeLayout>

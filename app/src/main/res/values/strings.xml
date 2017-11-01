@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SuperTools</string>
+
+    <string name="send_code">发送验证码</string>
+    <string name="login">登录</string>
+    <string name="new_user">新用户</string>
+    <string name="filter_code">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="code">短信验证码</string>
+</resources>

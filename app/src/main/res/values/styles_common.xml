@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 登录 -->
+    <style name="LoginItemStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">90px</item>
+        <item name="android:layout_marginRight">90px</item>
+        <item name="android:layout_marginTop">100px</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ForgetItemStyle">
+        <item name="android:layout_height">@dimen/main_item_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="LoginItemLabelStyle" parent="TextSize24AndColor4c4c4cStyle">
+        <item name="android:layout_marginRight">90px</item>
+    </style>
+
+    <style name="ForgetItemLabelStyle" parent="TextSize48AndColor666666Style">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">40px</item>
+    </style>
+
+    <style name="ClearWriteEditTextStyle" parent="TextSize48AndColor666666Style">
+        <item name="android:layout_height">120px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textColorHint">@color/text_mainbody_color_666666</item>
+        <item name="android:paddingTop">10px</item>
+        <item name="android:paddingBottom">30px</item>
+    </style>
+
+    <style name="forget_edittext" parent="ClearWriteEditTextStyle">
+        <item name="android:layout_height">144px</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_marginLeft">250px</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/text_size_48</item>
+        <item name="android:paddingTop">0px</item>
+        <item name="android:paddingBottom">0px</item>
+        <item name="android:paddingRight">40px</item>
+
+    </style>
+
+    <style name="LoginHorizontalLineViewStyle" parent="HorizontalLineViewStyle">
+        <item name="android:layout_marginLeft">80px</item>
+        <item name="android:layout_marginRight">80px</item>
+        <item name="android:background">@color/bg_divider</item>
+    </style>
+
+
+    <!--<style name="WarnDialogTheme" parent="SDL.Dialog">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="sdlTextPrimaryColor">@color/jayne_text_primary_light</item>-->
+        <!--<item name="sdlTextSecondaryColor">@color/jayne_text_secondary_light</item>-->
+        <!--<item name="sdlDividerColor">@color/jayne_divider_light</item>-->
+        <!--<item name="sdlPressedColor">@color/jayne_pressed_light</item>-->
+        <!--<item name="colorAccent">@color/jayne_accent</item>-->
+    <!--</style>-->
+
+</resources>
