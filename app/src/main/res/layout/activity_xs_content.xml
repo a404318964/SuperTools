@@ -16,4 +16,40 @@
         android:layout_width="match_parent"
         android:layout_marginTop="50px"/>
 
+    <LinearLayout
+        style="@style/XsContentItemStyle">
+
+        <TextView
+            style="@style/TextSize36AndColor333333Style"
+            android:text="出自："/>
+
+        <TextView
+            android:id="@+id/tv_book_name"
+            style="@style/TextSize36AndColor333333Style"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/XsContentItemStyle">
+
+        <TextView
+            style="@style/TextSize36AndColor333333Style"
+            android:text="内容类型："/>
+
+        <TextView
+            android:id="@+id/tv_content_type_name"
+            style="@style/TextSize36AndColor333333Style"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/XsContentItemStyle">
+
+        <TextView
+            style="@style/TextSize36AndColor333333Style"
+            android:text="书籍类型："/>
+
+        <TextView
+            android:id="@+id/tv_book_type_name"
+            style="@style/TextSize36AndColor333333Style"/>
+    </LinearLayout>
+
 </LinearLayout>

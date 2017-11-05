@@ -94,6 +94,7 @@ public class MyApplication extends Application {
         // 关闭推送打印的日志
 //        mPushAgent.setDebugMode(false);
 
+        mPushAgent.setDisplayNotificationNumber(0);
 
         // 处理推送自定义行为
         UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {

@@ -1,0 +1,11 @@
+<resources>
+
+
+    <style name="XsContentItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20px</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+</resources>

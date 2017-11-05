@@ -15,6 +15,10 @@ public class XsContent {
 
     private String content;
 
+    private String bookTypeName;
+    private String contentTypeName;
+    private String fromBookName;
+
     public String getId() {
         return id;
     }
@@ -53,5 +57,29 @@ public class XsContent {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getBookTypeName() {
+        return bookTypeName;
+    }
+
+    public void setBookTypeName(String bookTypeName) {
+        this.bookTypeName = bookTypeName;
+    }
+
+    public String getContentTypeName() {
+        return contentTypeName;
+    }
+
+    public void setContentTypeName(String contentTypeName) {
+        this.contentTypeName = contentTypeName;
+    }
+
+    public String getFromBookName() {
+        return fromBookName;
+    }
+
+    public void setFromBookName(String fromBookName) {
+        this.fromBookName = fromBookName;
     }
 }

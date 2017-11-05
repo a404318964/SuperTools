@@ -41,18 +41,18 @@
         <item name="android:paddingBottom">30px</item>
     </style>
 
-    <style name="forget_edittext" parent="ClearWriteEditTextStyle">
-        <item name="android:layout_height">144px</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginLeft">250px</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/text_size_48</item>
-        <item name="android:paddingTop">0px</item>
-        <item name="android:paddingBottom">0px</item>
-        <item name="android:paddingRight">40px</item>
+    <!--<style name="forget_edittext" parent="ClearWriteEditTextStyle">-->
+        <!--<item name="android:layout_height">144px</item>-->
+        <!--<item name="android:layout_alignParentLeft">true</item>-->
+        <!--<item name="android:layout_marginLeft">250px</item>-->
+        <!--<item name="android:layout_centerVertical">true</item>-->
+        <!--<item name="android:maxLines">1</item>-->
+        <!--<item name="android:textSize">@dimen/text_size_48</item>-->
+        <!--<item name="android:paddingTop">0px</item>-->
+        <!--<item name="android:paddingBottom">0px</item>-->
+        <!--<item name="android:paddingRight">40px</item>-->
 
-    </style>
+    <!--</style>-->
 
     <style name="LoginHorizontalLineViewStyle" parent="HorizontalLineViewStyle">
         <item name="android:layout_marginLeft">80px</item>

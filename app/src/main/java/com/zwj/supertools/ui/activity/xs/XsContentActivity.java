@@ -19,7 +19,7 @@ import com.zwj.zwjutils.net.callback.ParseBeanCallBack;
 
 public class XsContentActivity extends BaseAutoLayoutCommonActivity {
     private CommonTitleView titleView;
-    private TextView tvContent;
+    private TextView tvContent, tvContentTypeName, tvBookName, tvBookTypeName;
 
     @Override
     protected int getContentViewId() {
@@ -30,6 +30,9 @@ public class XsContentActivity extends BaseAutoLayoutCommonActivity {
     protected void findViews() {
         titleView = getView(R.id.id_title);
         tvContent = getView(R.id.tv_content);
+        tvContentTypeName = getView(R.id.tv_content_type_name);
+        tvBookName = getView(R.id.tv_book_name);
+        tvBookTypeName = getView(R.id.tv_book_type_name);
     }
 
     @Override
@@ -47,6 +50,9 @@ public class XsContentActivity extends BaseAutoLayoutCommonActivity {
                     @Override
                     public void onSuccess(ResponseBean responseBean, XsContent xsContent) {
                         tvContent.setText(xsContent.getContent());
+                        tvContentTypeName.setText(xsContent.getContentTypeName());
+                        tvBookName.setText(xsContent.getFromBookName());
+                        tvBookTypeName.setText(xsContent.getBookTypeName());
                     }
 
                     @Override
