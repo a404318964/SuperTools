@@ -36,6 +36,7 @@
                 style="@style/ClearWriteEditTextStyle"
                 android:hint="请输入账号或手机号"
                 android:maxLines="1"
+                android:text="winking"
                 android:paddingBottom="0px"
                 android:paddingTop="0px" />
 
@@ -58,6 +59,7 @@
                 style="@style/ClearWriteEditTextStyle"
                 android:digits="@string/filter_code"
                 android:hint="请输入密码"
+                android:text="winking123."
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingBottom="0px"

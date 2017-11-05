@@ -1,12 +1,20 @@
 package com.zwj.supertools;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.message.UmengNotificationClickHandler;
+import com.umeng.message.entity.UMessage;
+import com.zwj.supertools.constant.NotifyConstant;
+import com.zwj.supertools.constant.XSConstant;
+import com.zwj.supertools.ui.activity.xs.XsContentActivity;
 import com.zwj.zwjutils.FileUtils;
 import com.zwj.zwjutils.LogUtils;
 import com.zwj.zwjutils.ToastUtil;
@@ -85,6 +93,27 @@ public class MyApplication extends Application {
 
         // 关闭推送打印的日志
 //        mPushAgent.setDebugMode(false);
+
+
+        // 处理推送自定义行为
+        UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
+            @Override
+            public void dealWithCustomAction(Context context, UMessage msg) {
+//                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+                LogUtils.i("notificationClickHandler", "msg.custom -----> "+msg.custom);
+                LogUtils.i("notificationClickHandler", "msg.extra -----> "+ JSON.toJSONString(msg.extra));
+
+                switch (msg.custom) {
+                    case NotifyConstant.TYPE_OPEN_XS_CONTENT:
+                        Intent intent = new Intent(MyApplication.getGlobalContext(), XsContentActivity.class);
+                        intent.putExtra(XSConstant.CONTENT_ID, msg.extra.get(XSConstant.CONTENT_ID));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        };
+        mPushAgent.setNotificationClickHandler(notificationClickHandler);
     }
 
     public static MyApplication getGlobalContext() {

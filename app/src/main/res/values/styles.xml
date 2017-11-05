@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CommonTitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_height_titlebar</item>
+        <item name="leftIcon">@drawable/ic_back</item>
+        <item name="leftIconWidth">24dp</item>
+        <item name="leftIconHeight">21dp</item>
+        <item name="android:background">@color/theme_color</item>
+        <item name="hideBottomLine">true</item>
+        <item name="titleColor">@color/white</item>
+        <item name="tvtitleSize">20sp</item>
+    </style>
+
 </resources>

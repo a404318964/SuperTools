@@ -11,4 +11,6 @@
 
     <color name="wy_blue">#0195ff</color>
     <color name="wy_blue_press">#0189eb</color>
+
+    <color name="theme_color">#0195ff</color>
 </resources>
