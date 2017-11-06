@@ -1,4 +1,4 @@
-package com.zwj.suppertools.ui.activity.base;
+package com.zwj.supertools.ui.activity.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.umeng.message.PushAgent;
-import com.zwj.suppertools.MyApplication;
+import com.zwj.supertools.MyApplication;
 import com.zwj.zwjutils.AppManager;
 import com.zwj.zwjutils.LogUtils;
 

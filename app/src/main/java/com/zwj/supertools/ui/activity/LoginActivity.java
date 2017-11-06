@@ -1,4 +1,4 @@
-package com.zwj.suppertools.ui.activity;
+package com.zwj.supertools.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zwj.customview.ClearWriteEditText;
-import com.zwj.suppertools.MyApplication;
-import com.zwj.suppertools.R;
-import com.zwj.suppertools.constant.Constant;
-import com.zwj.suppertools.constant.UrlConstant;
-import com.zwj.suppertools.ui.activity.base.BaseAutoLayoutCommonActivity;
+import com.zwj.supertools.MyApplication;
+import com.zwj.supertools.R;
+import com.zwj.supertools.constant.Constant;
+import com.zwj.supertools.constant.UrlConstant;
+import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
 import com.zwj.zwjutils.SPUtil;
 import com.zwj.zwjutils.ToastUtil;
 import com.zwj.zwjutils.net.bean.RequestBean;

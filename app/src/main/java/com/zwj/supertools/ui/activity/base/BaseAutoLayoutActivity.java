@@ -1,4 +1,4 @@
-package com.zwj.suppertools.ui.activity.base;
+package com.zwj.supertools.ui.activity.base;
 
 import android.content.Context;
 import android.util.AttributeSet;

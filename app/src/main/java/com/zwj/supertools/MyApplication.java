@@ -1,4 +1,4 @@
-package com.zwj.suppertools;
+package com.zwj.supertools;
 
 import android.app.Application;
 import android.app.Notification;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.alibaba.fastjson.JSON;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengRegisterCallback;
@@ -14,14 +13,19 @@ import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
-import com.zwj.suppertools.constant.NotifyConstant;
-import com.zwj.suppertools.constant.XSConstant;
-import com.zwj.suppertools.ui.activity.xs.XsContentActivity;
+import com.zwj.supertools.bean.XsContent;
+import com.zwj.supertools.constant.NotifyConstant;
+import com.zwj.supertools.constant.UrlConstant;
+import com.zwj.supertools.constant.XSConstant;
+import com.zwj.supertools.greendao.XsContentDaoOpe;
+import com.zwj.supertools.ui.activity.xs.XsContentActivity;
 import com.zwj.zwjutils.FileUtils;
 import com.zwj.zwjutils.LogUtils;
 import com.zwj.zwjutils.ToastUtil;
 import com.zwj.zwjutils.image.ImageBuilder;
 import com.zwj.zwjutils.net.bean.RequestBean;
+import com.zwj.zwjutils.net.bean.ResponseBean;
+import com.zwj.zwjutils.net.callback.ParseBeanCallBack;
 import com.zwj.zwjutils.net.constant.Constant;
 import com.zwj.zwjutils.net.constant.ResponseConstant;
 
@@ -103,9 +107,7 @@ public class MyApplication extends Application {
 
             @Override
             public void dealWithCustomAction(Context context, UMessage msg) {
-//                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
                 LogUtils.i("notificationClickHandler", "msg.custom -----> "+msg.custom);
-                LogUtils.i("notificationClickHandler", "msg.extra -----> "+ JSON.toJSONString(msg.extra));
 
                 switch (msg.custom) {
                     case NotifyConstant.TYPE_OPEN_XS_CONTENT:
@@ -123,9 +125,18 @@ public class MyApplication extends Application {
             @Override
             public Notification getNotification(Context context, UMessage msg) {
 
-                LogUtils.i(TAG, "getNotification");
-
-                // TODO
+                // 收到段落推送后将其添加到数据库
+                String contentId = msg.extra.get(XSConstant.CONTENT_ID);
+                if(!TextUtils.isEmpty(contentId)) {
+                    new RequestBean(UrlConstant.URL_GET_XS_CONTENT_BY_ID, RequestBean.METHOD_GET)
+                            .addParam("id", contentId)
+                            .setCallback(new ParseBeanCallBack<XsContent>(XsContent.class) {
+                                @Override
+                                public void onSuccess(ResponseBean responseBean, XsContent xsContent) {
+                                    XsContentDaoOpe.insertData(xsContent);
+                                }
+                            }).request(MyApplication.getGlobalContext());
+                }
 
 //                switch (msg.builder_id) {
 //                    case 1:
@@ -151,7 +162,6 @@ public class MyApplication extends Application {
             }
         };
         mPushAgent.setMessageHandler(messageHandler);
-
     }
 
     public static MyApplication getGlobalContext() {

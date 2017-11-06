@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zwj.suppertools">
+    package="com.zwj.supertools">
 
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,7 +15,7 @@
 
 
     <application
-        android:name="com.zwj.suppertools.MyApplication"
+        android:name="com.zwj.supertools.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -46,7 +46,7 @@
 
 
         <activity
-            android:name="com.zwj.suppertools.ui.activity.LoginActivity"
+            android:name="com.zwj.supertools.ui.activity.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,11 +56,14 @@
         </activity>
 
         <activity
-            android:name="com.zwj.suppertools.ui.activity.MainActivity"
+            android:name="com.zwj.supertools.ui.activity.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.zwj.suppertools.ui.activity.xs.XsContentActivity"
+            android:name="com.zwj.supertools.ui.activity.xs.XsContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zwj.supertools.ui.activity.xs.XsContentListActivity"
             android:screenOrientation="portrait" />
     </application>
 

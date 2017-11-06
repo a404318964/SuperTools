@@ -1,5 +1,6 @@
-package com.zwj.suppertools.ui.activity;
+package com.zwj.supertools.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,8 +13,9 @@ import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
-import com.zwj.suppertools.R;
-import com.zwj.suppertools.ui.activity.base.BaseAutoLayoutCommonActivity;
+import com.zwj.supertools.R;
+import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
+import com.zwj.supertools.ui.activity.xs.XsContentListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,6 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
         menuList.add("小说");
         menuList.add("名称生成");
 
-
         CommonAdapter<String> adapter = new CommonAdapter<String>(mContext, R.layout.item_main_menu, menuList) {
             @Override
             protected void convert(ViewHolder viewHolder, String s, int i) {
@@ -61,7 +62,12 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
         rv.setItemAnimator(new DefaultItemAnimator());
         adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener<String>() {
             @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, String deviceBean, int i) {
+            public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, String deviceBean, int position) {
+                switch (position) {
+                    case 1:
+                        startActivity(new Intent(mContext, XsContentListActivity.class));
+                        break;
+                }
             }
 
             @Override
