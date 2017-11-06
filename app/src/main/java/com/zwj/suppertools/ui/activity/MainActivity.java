@@ -1,4 +1,4 @@
-package com.zwj.supertools.ui.activity;
+package com.zwj.suppertools.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,8 +12,8 @@ import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
-import com.zwj.supertools.R;
-import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
+import com.zwj.suppertools.R;
+import com.zwj.suppertools.ui.activity.base.BaseAutoLayoutCommonActivity;
 
 import java.util.ArrayList;
 import java.util.List;

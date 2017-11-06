@@ -1,4 +1,4 @@
-package com.zwj.supertools.ui.activity.base;
+package com.zwj.suppertools.ui.activity.base;
 
 import com.umeng.analytics.MobclickAgent;
 

@@ -1,4 +1,4 @@
-package com.zwj.supertools.constant;
+package com.zwj.suppertools.constant;
 
 /**
  * Created by zwj on 2017/11/1.

@@ -1,6 +1,7 @@
-package com.zwj.supertools;
+package com.zwj.suppertools;
 
 import android.app.Application;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -10,11 +11,12 @@ import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
-import com.zwj.supertools.constant.NotifyConstant;
-import com.zwj.supertools.constant.XSConstant;
-import com.zwj.supertools.ui.activity.xs.XsContentActivity;
+import com.zwj.suppertools.constant.NotifyConstant;
+import com.zwj.suppertools.constant.XSConstant;
+import com.zwj.suppertools.ui.activity.xs.XsContentActivity;
 import com.zwj.zwjutils.FileUtils;
 import com.zwj.zwjutils.LogUtils;
 import com.zwj.zwjutils.ToastUtil;
@@ -98,6 +100,7 @@ public class MyApplication extends Application {
 
         // 处理推送自定义行为
         UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
+
             @Override
             public void dealWithCustomAction(Context context, UMessage msg) {
 //                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
@@ -115,6 +118,40 @@ public class MyApplication extends Application {
             }
         };
         mPushAgent.setNotificationClickHandler(notificationClickHandler);
+
+        UmengMessageHandler messageHandler = new UmengMessageHandler() {
+            @Override
+            public Notification getNotification(Context context, UMessage msg) {
+
+                LogUtils.i(TAG, "getNotification");
+
+                // TODO
+
+//                switch (msg.builder_id) {
+//                    case 1:
+//                        Notification.Builder builder = new Notification.Builder(context);
+//                        RemoteViews myNotificationView = new RemoteViews(context.getPackageName(),
+//                                R.layout.notification_view);
+//                        myNotificationView.setTextViewText(R.id.notification_title, msg.title);
+//                        myNotificationView.setTextViewText(R.id.notification_text, msg.text);
+//                        myNotificationView.setImageViewBitmap(R.id.notification_large_icon,
+//                                getLargeIcon(context, msg));
+//                        myNotificationView.setImageViewResource(R.id.notification_small_icon,
+//                                getSmallIconId(context, msg));
+//                        builder.setContent(myNotificationView)
+//                                .setSmallIcon(getSmallIconId(context, msg))
+//                                .setTicker(msg.ticker)
+//                                .setAutoCancel(true);
+//
+//                        return builder.getNotification();
+//                    default:
+                        //默认为0，若填写的builder_id并不存在，也使用默认。
+                        return super.getNotification(context, msg);
+//                }
+            }
+        };
+        mPushAgent.setMessageHandler(messageHandler);
+
     }
 
     public static MyApplication getGlobalContext() {

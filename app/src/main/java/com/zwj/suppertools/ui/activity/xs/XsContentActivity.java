@@ -1,4 +1,4 @@
-package com.zwj.supertools.ui.activity.xs;
+package com.zwj.suppertools.ui.activity.xs;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -6,12 +6,12 @@ import android.widget.TextView;
 import com.zwj.customview.progress.ProgressBean;
 import com.zwj.customview.progress.ProgressUtil;
 import com.zwj.customview.titleview.CommonTitleView;
-import com.zwj.supertools.MyApplication;
-import com.zwj.supertools.R;
-import com.zwj.supertools.bean.XsContent;
-import com.zwj.supertools.constant.UrlConstant;
-import com.zwj.supertools.constant.XSConstant;
-import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
+import com.zwj.suppertools.MyApplication;
+import com.zwj.suppertools.R;
+import com.zwj.suppertools.bean.XsContent;
+import com.zwj.suppertools.constant.UrlConstant;
+import com.zwj.suppertools.constant.XSConstant;
+import com.zwj.suppertools.ui.activity.base.BaseAutoLayoutCommonActivity;
 import com.zwj.zwjutils.LogUtils;
 import com.zwj.zwjutils.net.bean.RequestBean;
 import com.zwj.zwjutils.net.bean.ResponseBean;

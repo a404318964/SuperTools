@@ -1,10 +1,16 @@
-package com.zwj.supertools.bean;
+package com.zwj.suppertools.bean;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by zwj on 2017/11/5.
  */
 
+@Entity
 public class XsContent {
+    @Id
     private String id;
 
     private Integer bookType;
@@ -18,6 +24,24 @@ public class XsContent {
     private String bookTypeName;
     private String contentTypeName;
     private String fromBookName;
+
+    @Generated(hash = 126628011)
+    public XsContent(String id, Integer bookType, Integer contentType,
+            String fromBook, String content, String bookTypeName,
+            String contentTypeName, String fromBookName) {
+        this.id = id;
+        this.bookType = bookType;
+        this.contentType = contentType;
+        this.fromBook = fromBook;
+        this.content = content;
+        this.bookTypeName = bookTypeName;
+        this.contentTypeName = contentTypeName;
+        this.fromBookName = fromBookName;
+    }
+
+    @Generated(hash = 967546032)
+    public XsContent() {
+    }
 
     public String getId() {
         return id;

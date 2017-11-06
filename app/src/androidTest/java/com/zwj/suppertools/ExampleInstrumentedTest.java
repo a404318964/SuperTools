@@ -1,4 +1,4 @@
-package com.zwj.supertools;
+package com.zwj.suppertools;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -78,4 +79,12 @@ dependencies {
     // 友盟
     compile 'com.umeng.analytics:analytics:latest.integration'
 //    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+
+    compile 'org.greenrobot:greendao:3.2.2'
+}
+
+greendao {
+    schemaVersion 1
+    daoPackage 'com.zwj.suppertools.greendao'
+    targetGenDir 'src/main/java'
 }
