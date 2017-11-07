@@ -85,6 +85,6 @@ dependencies {
 
 greendao {
     schemaVersion 1
-    daoPackage 'com.zwj.suppertools.greendao'
+    daoPackage 'com.zwj.supertools.greendao'
     targetGenDir 'src/main/java'
 }

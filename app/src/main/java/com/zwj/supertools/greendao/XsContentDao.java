@@ -32,6 +32,7 @@ public class XsContentDao extends AbstractDao<XsContent, String> {
         public final static Property BookTypeName = new Property(5, String.class, "bookTypeName", false, "BOOK_TYPE_NAME");
         public final static Property ContentTypeName = new Property(6, String.class, "contentTypeName", false, "CONTENT_TYPE_NAME");
         public final static Property FromBookName = new Property(7, String.class, "fromBookName", false, "FROM_BOOK_NAME");
+        public final static Property CreateTime = new Property(8, java.util.Date.class, "createTime", false, "CREATE_TIME");
     }
 
 
@@ -54,7 +55,8 @@ public class XsContentDao extends AbstractDao<XsContent, String> {
                 "\"CONTENT\" TEXT," + // 4: content
                 "\"BOOK_TYPE_NAME\" TEXT," + // 5: bookTypeName
                 "\"CONTENT_TYPE_NAME\" TEXT," + // 6: contentTypeName
-                "\"FROM_BOOK_NAME\" TEXT);"); // 7: fromBookName
+                "\"FROM_BOOK_NAME\" TEXT," + // 7: fromBookName
+                "\"CREATE_TIME\" INTEGER);"); // 8: createTime
     }
 
     /** Drops the underlying database table. */
@@ -106,6 +108,11 @@ public class XsContentDao extends AbstractDao<XsContent, String> {
         if (fromBookName != null) {
             stmt.bindString(8, fromBookName);
         }
+ 
+        java.util.Date createTime = entity.getCreateTime();
+        if (createTime != null) {
+            stmt.bindLong(9, createTime.getTime());
+        }
     }
 
     @Override
@@ -151,6 +158,11 @@ public class XsContentDao extends AbstractDao<XsContent, String> {
         if (fromBookName != null) {
             stmt.bindString(8, fromBookName);
         }
+ 
+        java.util.Date createTime = entity.getCreateTime();
+        if (createTime != null) {
+            stmt.bindLong(9, createTime.getTime());
+        }
     }
 
     @Override
@@ -168,7 +180,8 @@ public class XsContentDao extends AbstractDao<XsContent, String> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // content
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // bookTypeName
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // contentTypeName
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // fromBookName
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // fromBookName
+            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)) // createTime
         );
         return entity;
     }
@@ -183,6 +196,7 @@ public class XsContentDao extends AbstractDao<XsContent, String> {
         entity.setBookTypeName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setContentTypeName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setFromBookName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setCreateTime(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
      }
     
     @Override

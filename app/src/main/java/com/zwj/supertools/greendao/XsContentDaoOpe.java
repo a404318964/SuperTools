@@ -1,11 +1,15 @@
 package com.zwj.supertools.greendao;
 
 import com.zwj.supertools.MyApplication;
+import com.zwj.supertools.bean.Page;
 import com.zwj.supertools.bean.XsContent;
 import com.zwj.zwjutils.CommonUtil;
 
+import org.greenrobot.greendao.async.AsyncOperationListener;
+import org.greenrobot.greendao.async.AsyncSession;
 import org.greenrobot.greendao.query.QueryBuilder;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +22,9 @@ public class XsContentDaoOpe {
      * 添加数据至数据库
      */
     public static long insertData(XsContent obj) {
+        if(obj.getCreateTime() == null) {
+            obj.setCreateTime(new Date());
+        }
         return DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().insert(obj);
     }
 
@@ -90,4 +97,31 @@ public class XsContentDaoOpe {
         // List<Student> list = build.list();
         return builder.where(XsContentDao.Properties.Id.eq(id)).list();
     }
+
+    /**
+     * 查询所有数据(异步)
+     */
+    public static void asyncQueryAll(AsyncOperationListener asyncOperationListener) {
+        asyncQueryAll(asyncOperationListener, null);
+    }
+
+    /**
+     * 查询所有数据(异步)
+     */
+    public static void asyncQueryAll(AsyncOperationListener asyncOperationListener, Page page) {
+        AsyncSession async = DbManager.getDaoSession(MyApplication.getGlobalContext())
+                .startAsyncSession();
+        async.setListener(asyncOperationListener);
+
+        QueryBuilder<XsContent> builder = DbManager.getDaoSession(MyApplication.getGlobalContext())
+                .getXsContentDao().queryBuilder();
+
+        if(page != null) {
+            builder.offset(page.getPageNo())
+                    .limit(page.getPageNum());
+        }
+
+        async.queryList(builder.orderDesc(XsContentDao.Properties.CreateTime).build());
+    }
+
 }

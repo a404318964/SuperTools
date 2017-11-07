@@ -1,8 +1,10 @@
 package com.zwj.supertools.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+
+import java.util.Date;
 
 /**
  * Created by zwj on 2017/11/5.
@@ -25,10 +27,12 @@ public class XsContent {
     private String contentTypeName;
     private String fromBookName;
 
-    @Generated(hash = 126628011)
+    private Date createTime;
+
+    @Generated(hash = 939277113)
     public XsContent(String id, Integer bookType, Integer contentType,
             String fromBook, String content, String bookTypeName,
-            String contentTypeName, String fromBookName) {
+            String contentTypeName, String fromBookName, Date createTime) {
         this.id = id;
         this.bookType = bookType;
         this.contentType = contentType;
@@ -37,6 +41,7 @@ public class XsContent {
         this.bookTypeName = bookTypeName;
         this.contentTypeName = contentTypeName;
         this.fromBookName = fromBookName;
+        this.createTime = createTime;
     }
 
     @Generated(hash = 967546032)
@@ -105,5 +110,13 @@ public class XsContent {
 
     public void setFromBookName(String fromBookName) {
         this.fromBookName = fromBookName;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
