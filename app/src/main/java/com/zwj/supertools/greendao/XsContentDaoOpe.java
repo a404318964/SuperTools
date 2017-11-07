@@ -2,7 +2,7 @@ package com.zwj.supertools.greendao;
 
 import com.zwj.supertools.MyApplication;
 import com.zwj.supertools.bean.Page;
-import com.zwj.supertools.bean.XsContent;
+import com.zwj.supertools.bean.xs.XsContent;
 import com.zwj.zwjutils.CommonUtil;
 
 import org.greenrobot.greendao.async.AsyncOperationListener;

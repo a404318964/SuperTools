@@ -8,7 +8,7 @@ import com.zwj.customview.progress.ProgressUtil;
 import com.zwj.customview.titleview.CommonTitleView;
 import com.zwj.supertools.MyApplication;
 import com.zwj.supertools.R;
-import com.zwj.supertools.bean.XsContent;
+import com.zwj.supertools.bean.xs.XsContent;
 import com.zwj.supertools.constant.UrlConstant;
 import com.zwj.supertools.constant.XSConstant;
 import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;

@@ -13,7 +13,7 @@ import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
-import com.zwj.supertools.bean.XsContent;
+import com.zwj.supertools.bean.xs.XsContent;
 import com.zwj.supertools.constant.NotifyConstant;
 import com.zwj.supertools.constant.UrlConstant;
 import com.zwj.supertools.constant.XSConstant;

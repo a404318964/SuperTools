@@ -8,7 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.zwj.supertools.bean.XsContent;
+import com.zwj.supertools.bean.xs.XsContent;
 
 import com.zwj.supertools.greendao.XsContentDao;
 

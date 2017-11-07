@@ -12,7 +12,7 @@ import com.zwj.customview.progress.ProgressUtil;
 import com.zwj.customview.titleview.CommonTitleView;
 import com.zwj.supertools.R;
 import com.zwj.supertools.bean.Page;
-import com.zwj.supertools.bean.XsContent;
+import com.zwj.supertools.bean.xs.XsContent;
 import com.zwj.supertools.greendao.XsContentDaoOpe;
 import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
 import com.zwj.zwjutils.DateUtil;

@@ -1,4 +1,4 @@
-package com.zwj.supertools.ui.activity;
+package com.zwj.supertools.ui.activity.name;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,18 +15,16 @@ import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zwj.supertools.R;
 import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
-import com.zwj.supertools.ui.activity.name.NameActivity;
-import com.zwj.supertools.ui.activity.xs.XsContentListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseAutoLayoutCommonActivity {
+public class NameActivity extends BaseAutoLayoutCommonActivity {
     private RecyclerView rv;
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_main;
+        return R.layout.activity_name;
     }
 
     @Override
@@ -40,9 +38,10 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
         rv.setHasFixedSize(true);
 
         List<String> menuList = new ArrayList<>();
-        menuList.add("基金");
-        menuList.add("小说");
-        menuList.add("名称生成");
+        menuList.add("人名");
+        menuList.add("人名生成");
+        menuList.add("地名");
+        menuList.add("地名生成");
 
         CommonAdapter<String> adapter = new CommonAdapter<String>(mContext, R.layout.item_main_menu, menuList) {
             @Override
@@ -65,12 +64,12 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, String deviceBean, int position) {
                 switch (position) {
-                    case 1:
-                        startActivity(new Intent(mContext, XsContentListActivity.class));
+                    case 0:
+//                        startActivity(new Intent(mContext, XsContentListActivity.class));
                         break;
 
-                    case 2:
-                        startActivity(new Intent(mContext, NameActivity.class));
+                    case 1:
+                        startActivity(new Intent(mContext, PersonNameActivity.class));
                         break;
                 }
             }

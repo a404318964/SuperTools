@@ -1,4 +1,4 @@
-package com.zwj.supertools.bean;
+package com.zwj.supertools.bean.xs;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

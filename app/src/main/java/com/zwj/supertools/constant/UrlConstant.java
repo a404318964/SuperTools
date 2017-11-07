@@ -13,4 +13,8 @@ public interface UrlConstant {
     String URL_LOGIN = URL_BASE + "/user/login";
 
     String URL_GET_XS_CONTENT_BY_ID = URL_BASE + "/xs/getContentById";
+
+
+    // 名称
+    String URL_GENERATE_PERSON_NAME = URL_BASE + "/common/generateName/generatePersonName";
 }
