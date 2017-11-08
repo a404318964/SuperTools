@@ -19,6 +19,7 @@ import com.zwj.supertools.constant.UrlConstant;
 import com.zwj.supertools.constant.XSConstant;
 import com.zwj.supertools.greendao.XsContentDaoOpe;
 import com.zwj.supertools.ui.activity.xs.XsContentActivity;
+import com.zwj.zwjutils.DateUtil;
 import com.zwj.zwjutils.FileUtils;
 import com.zwj.zwjutils.LogUtils;
 import com.zwj.zwjutils.ToastUtil;
@@ -127,12 +128,14 @@ public class MyApplication extends Application {
 
                 // 收到段落推送后将其添加到数据库
                 String contentId = msg.extra.get(XSConstant.CONTENT_ID);
+                String pushTime = msg.extra.get(NotifyConstant.PUSH_TIME);
                 if(!TextUtils.isEmpty(contentId)) {
                     new RequestBean(UrlConstant.URL_GET_XS_CONTENT_BY_ID, RequestBean.METHOD_GET)
                             .addParam("id", contentId)
                             .setCallback(new ParseBeanCallBack<XsContent>(XsContent.class) {
                                 @Override
                                 public void onSuccess(ResponseBean responseBean, XsContent xsContent) {
+                                    xsContent.setCreateTime(DateUtil.str2Date(pushTime));
                                     XsContentDaoOpe.insertData(xsContent);
                                 }
                             }).request(MyApplication.getGlobalContext());

@@ -8,4 +8,6 @@ public interface XSConstant {
 
     String CONTENT_ID = "contentId";
 
+    String XS_CONTENT = "xs_content";
+
 }

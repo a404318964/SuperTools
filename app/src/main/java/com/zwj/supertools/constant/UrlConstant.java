@@ -5,7 +5,9 @@ package com.zwj.supertools.constant;
  */
 
 public interface UrlConstant {
-    String URL_BASE = "http://116.196.72.163/suppertools/api";
+    String URL_BASE_1 = "http://116.196.72.163/api";
+    String URL_BASE_2 = "http://116.196.72.163/suppertools/api";
+    String URL_BASE = URL_BASE_1;
     //    String URL_BASE = "http://192.168.1.101:8088/api";    // 家里
 //    String URL_BASE = "http://192.168.0.103:8088/api";    // 宿舍
 

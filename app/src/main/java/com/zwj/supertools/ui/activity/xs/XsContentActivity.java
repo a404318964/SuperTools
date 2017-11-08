@@ -1,11 +1,13 @@
 package com.zwj.supertools.ui.activity.xs;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.zwj.customview.progress.ProgressBean;
 import com.zwj.customview.progress.ProgressUtil;
 import com.zwj.customview.titleview.CommonTitleView;
+import com.zwj.customview.titleview.SimpleTitleMenuClickListener;
 import com.zwj.supertools.MyApplication;
 import com.zwj.supertools.R;
 import com.zwj.supertools.bean.xs.XsContent;
@@ -39,32 +41,45 @@ public class XsContentActivity extends BaseAutoLayoutCommonActivity {
     protected void initData(Bundle savedInstanceState) {
 
         String contentId = getIntent().getStringExtra(XSConstant.CONTENT_ID);
+        if(TextUtils.isEmpty(contentId)) {
+            XsContent xsContent = getIntent().getParcelableExtra(XSConstant.XS_CONTENT);
+            refreshUI(xsContent);
+        }else {
+            new ProgressBean()
+                    .setLoadingTip("获取内容中")
+                    .startProgress(mContext);
 
-        new ProgressBean()
-                .setLoadingTip("获取内容中")
-                .startProgress(mContext);
+            new RequestBean(UrlConstant.URL_GET_XS_CONTENT_BY_ID, RequestBean.METHOD_GET)
+                    .addParam("id", contentId)
+                    .setCallback(new ParseBeanCallBack<XsContent>(XsContent.class) {
+                        @Override
+                        public void onSuccess(ResponseBean responseBean, XsContent xsContent) {
+                            refreshUI(xsContent);
+                        }
 
-        new RequestBean(UrlConstant.URL_GET_XS_CONTENT_BY_ID, RequestBean.METHOD_GET)
-                .addParam("id", contentId)
-                .setCallback(new ParseBeanCallBack<XsContent>(XsContent.class) {
-                    @Override
-                    public void onSuccess(ResponseBean responseBean, XsContent xsContent) {
-                        tvContent.setText(xsContent.getContent());
-                        tvContentTypeName.setText(xsContent.getContentTypeName());
-                        tvBookName.setText(xsContent.getFromBookName());
-                        tvBookTypeName.setText(xsContent.getBookTypeName());
-                    }
-
-                    @Override
-                    public void onFinished(ResponseBean responseBean) {
-                        LogUtils.i(TAG, "onFinished");
-                        ProgressUtil.hideProgress();
-                    }
-                }).request(MyApplication.getGlobalContext());
+                        @Override
+                        public void onFinished(ResponseBean responseBean) {
+                            LogUtils.i(TAG, "onFinished");
+                            ProgressUtil.hideProgress();
+                        }
+                    }).request(MyApplication.getGlobalContext());
+        }
     }
 
     @Override
     protected void setListener() {
+        titleView.setOnTitleMenuClickListener(new SimpleTitleMenuClickListener(){
+            @Override
+            public void onClickImLeftListener() {
+                finish();
+            }
+        });
+    }
 
+    private void refreshUI(XsContent xsContent) {
+        tvContent.setText(xsContent.getContent());
+        tvContentTypeName.setText(xsContent.getContentTypeName());
+        tvBookName.setText(xsContent.getFromBookName());
+        tvBookTypeName.setText(xsContent.getBookTypeName());
     }
 }

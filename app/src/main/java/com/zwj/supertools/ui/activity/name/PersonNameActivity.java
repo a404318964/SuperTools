@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -26,10 +27,13 @@ import com.zwj.zwjutils.net.callback.ParseListCallBack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonNameActivity extends BaseAutoLayoutCommonActivity {
+public class PersonNameActivity extends BaseAutoLayoutCommonActivity implements View.OnClickListener{
+    private RadioButton rbBoth, rbOne, rbTwo;
     private RecyclerView rv;
     private CommonAdapter<PersonNameWithBook> adapter;
     private List<PersonNameWithBook> personNameList = new ArrayList<>();
+
+    private GeneratePersonNameParam param = new GeneratePersonNameParam();;
 
     @Override
     protected int getContentViewId() {
@@ -39,6 +43,9 @@ public class PersonNameActivity extends BaseAutoLayoutCommonActivity {
     @Override
     protected void findViews() {
         rv = getView(R.id.rv);
+        rbBoth = getView(R.id.rb_both);
+        rbOne = getView(R.id.rb_one);
+        rbTwo = getView(R.id.rb_two);
     }
 
     @Override
@@ -48,12 +55,17 @@ public class PersonNameActivity extends BaseAutoLayoutCommonActivity {
 
     @Override
     protected void setListener() {
-
+        rbBoth.setOnClickListener(this);
+        rbOne.setOnClickListener(this);
+        rbTwo.setOnClickListener(this);
     }
 
     // 点击生成按钮
     public void generate(View view) {
-        GeneratePersonNameParam param = new GeneratePersonNameParam();
+
+
+
+
         new RequestBean(UrlConstant.URL_GENERATE_PERSON_NAME, RequestBean.METHOD_POST)
                 .setBodyContent(JSON.toJSONString(param))
                 .setCallback(new ParseListCallBack<PersonNameWithBook>(PersonNameWithBook.class) {
@@ -108,4 +120,20 @@ public class PersonNameActivity extends BaseAutoLayoutCommonActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rb_both:
+                param.setNameCount(0);
+                break;
+
+            case R.id.rb_one:
+                param.setNameCount(1);
+                break;
+
+            case R.id.rb_two:
+                param.setNameCount(2);
+                break;
+        }
+    }
 }

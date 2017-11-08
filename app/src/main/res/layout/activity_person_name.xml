@@ -5,12 +5,98 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextSize24AndColor666666Style"
+            android:text="firstnameNum:"/>
+
+        <EditText
+            android:id="@+id/et_firstnameNumber"
+            style="@style/TextSize24AndColor666666Style"
+            android:layout_width="200px" />
+
+
+        <TextView
+            style="@style/TextSize24AndColor666666Style"
+            android:layout_marginLeft="20px"
+            android:text="lastnameNum:"/>
+
+        <EditText
+            android:id="@+id/et_lastnamenumber"
+            style="@style/TextSize24AndColor666666Style"
+            android:layout_width="200px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextSize24AndColor666666Style"
+            android:text="firstName:"/>
+
+        <EditText
+            android:id="@+id/et_firstName"
+            style="@style/TextSize24AndColor666666Style"
+            android:layout_width="200px" />
+
+
+        <TextView
+            style="@style/TextSize24AndColor666666Style"
+            android:layout_marginLeft="30px"
+            android:text="lastNameForOne:"/>
+
+        <EditText
+            android:id="@+id/et_lastNameForOne"
+            style="@style/TextSize24AndColor666666Style"
+            android:layout_width="200px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.zhy.autolayout.widget.AutoRadioGroup
+            android:id="@+id/rg_reason"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checkedButton="@+id/rb_both"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_both"
+                style="@style/TextSize24AndColor666666Style"
+                android:layout_marginLeft="20px"
+                android:text="双字" />
+
+            <RadioButton
+                android:id="@+id/rb_one"
+                style="@style/TextSize24AndColor666666Style"
+                android:text="单字"/>
+
+            <RadioButton
+                android:id="@+id/rb_two"
+                style="@style/TextSize24AndColor666666Style"
+                android:layout_marginLeft="20px"
+                android:text="双字" />
+
+        </com.zhy.autolayout.widget.AutoRadioGroup>
+
+    </LinearLayout>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="120px"
         android:layout_marginLeft="50px"
         android:layout_marginRight="50px"
-        android:layout_marginTop="30px"
+        android:layout_marginTop="20px"
         android:text="生成"
         android:onClick="generate"/>
 

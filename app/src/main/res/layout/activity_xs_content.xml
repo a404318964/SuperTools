@@ -10,46 +10,57 @@
         style="@style/CommonTitleStyle"
         app:tvtitle="美文段落" />
 
-    <TextView
-        android:id="@+id/tv_content"
-        style="@style/TextSize36AndColor333333Style"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="50px"/>
+        android:layout_height="match_parent"
+        android:layout_margin="20px">
 
-    <LinearLayout
-        style="@style/XsContentItemStyle">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            style="@style/TextSize36AndColor333333Style"
-            android:text="出自："/>
+            <TextView
+                android:id="@+id/tv_content"
+                style="@style/TextSize36AndColor333333Style"
+                android:layout_width="match_parent"
+                android:layout_marginTop="50px" />
 
-        <TextView
-            android:id="@+id/tv_book_name"
-            style="@style/TextSize36AndColor333333Style"/>
-    </LinearLayout>
+            <LinearLayout style="@style/XsContentItemStyle">
 
-    <LinearLayout
-        style="@style/XsContentItemStyle">
+                <TextView
+                    style="@style/TextSize36AndColor333333Style"
+                    android:text="出自：" />
 
-        <TextView
-            style="@style/TextSize36AndColor333333Style"
-            android:text="内容类型："/>
+                <TextView
+                    android:id="@+id/tv_book_name"
+                    style="@style/TextSize36AndColor333333Style" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_content_type_name"
-            style="@style/TextSize36AndColor333333Style"/>
-    </LinearLayout>
+            <LinearLayout style="@style/XsContentItemStyle">
 
-    <LinearLayout
-        style="@style/XsContentItemStyle">
+                <TextView
+                    style="@style/TextSize36AndColor333333Style"
+                    android:text="内容类型：" />
 
-        <TextView
-            style="@style/TextSize36AndColor333333Style"
-            android:text="书籍类型："/>
+                <TextView
+                    android:id="@+id/tv_content_type_name"
+                    style="@style/TextSize36AndColor333333Style" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_book_type_name"
-            style="@style/TextSize36AndColor333333Style"/>
-    </LinearLayout>
+            <LinearLayout style="@style/XsContentItemStyle">
+
+                <TextView
+                    style="@style/TextSize36AndColor333333Style"
+                    android:text="书籍类型：" />
+
+                <TextView
+                    android:id="@+id/tv_book_type_name"
+                    style="@style/TextSize36AndColor333333Style" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

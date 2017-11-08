@@ -1,18 +1,23 @@
 package com.zwj.supertools.ui.activity.xs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zwj.customview.progress.ProgressBean;
 import com.zwj.customview.progress.ProgressUtil;
 import com.zwj.customview.titleview.CommonTitleView;
+import com.zwj.customview.titleview.SimpleTitleMenuClickListener;
 import com.zwj.supertools.R;
 import com.zwj.supertools.bean.Page;
 import com.zwj.supertools.bean.xs.XsContent;
+import com.zwj.supertools.constant.XSConstant;
 import com.zwj.supertools.greendao.XsContentDaoOpe;
 import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
 import com.zwj.zwjutils.DateUtil;
@@ -61,7 +66,12 @@ public class XsContentListActivity extends BaseAutoLayoutCommonActivity {
 
     @Override
     protected void setListener() {
-
+        titleView.setOnTitleMenuClickListener(new SimpleTitleMenuClickListener(){
+            @Override
+            public void onClickImLeftListener() {
+                finish();
+            }
+        });
     }
 
     private void refreshUI() {
@@ -82,6 +92,20 @@ public class XsContentListActivity extends BaseAutoLayoutCommonActivity {
             rv.setHasFixedSize(true);
             rv.setAdapter(adapter);
             rv.setItemAnimator(new DefaultItemAnimator());
+
+            adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener<XsContent>() {
+                @Override
+                public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, XsContent xsContent, int i) {
+                    Intent intent = new Intent(mContext, XsContentActivity.class);
+                    intent.putExtra(XSConstant.XS_CONTENT, xsContent);
+                    startActivity(intent);
+                }
+
+                @Override
+                public boolean onItemLongClick(View view, RecyclerView.ViewHolder viewHolder, XsContent xsContent, int i) {
+                    return false;
+                }
+            });
         } else {
             adapter.setDatasWithRefresh(contentList);
         }

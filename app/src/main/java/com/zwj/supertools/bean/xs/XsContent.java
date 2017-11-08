@@ -1,5 +1,8 @@
 package com.zwj.supertools.bean.xs;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -11,7 +14,7 @@ import java.util.Date;
  */
 
 @Entity
-public class XsContent {
+public class XsContent implements Parcelable{
     @Id
     private String id;
 
@@ -119,4 +122,47 @@ public class XsContent {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeValue(this.bookType);
+        dest.writeValue(this.contentType);
+        dest.writeString(this.fromBook);
+        dest.writeString(this.content);
+        dest.writeString(this.bookTypeName);
+        dest.writeString(this.contentTypeName);
+        dest.writeString(this.fromBookName);
+        dest.writeLong(this.createTime != null ? this.createTime.getTime() : -1);
+    }
+
+    protected XsContent(Parcel in) {
+        this.id = in.readString();
+        this.bookType = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.contentType = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.fromBook = in.readString();
+        this.content = in.readString();
+        this.bookTypeName = in.readString();
+        this.contentTypeName = in.readString();
+        this.fromBookName = in.readString();
+        long tmpCreateTime = in.readLong();
+        this.createTime = tmpCreateTime == -1 ? null : new Date(tmpCreateTime);
+    }
+
+    public static final Creator<XsContent> CREATOR = new Creator<XsContent>() {
+        @Override
+        public XsContent createFromParcel(Parcel source) {
+            return new XsContent(source);
+        }
+
+        @Override
+        public XsContent[] newArray(int size) {
+            return new XsContent[size];
+        }
+    };
 }
