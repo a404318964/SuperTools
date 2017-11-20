@@ -81,6 +81,10 @@ dependencies {
 //    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 
     compile 'org.greenrobot:greendao:3.2.2'
+    // 数据库加密
+//    compile 'net.zetetic:android-database-sqlcipher:3.5.7'
+
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 }
 
 greendao {

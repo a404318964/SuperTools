@@ -15,6 +15,7 @@ import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zwj.supertools.R;
 import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
+import com.zwj.supertools.ui.activity.fund.CurFundInfoListActivity;
 import com.zwj.supertools.ui.activity.name.NameActivity;
 import com.zwj.supertools.ui.activity.xs.XsContentListActivity;
 
@@ -65,6 +66,11 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, String deviceBean, int position) {
                 switch (position) {
+
+                    case 0:
+                        startActivity(new Intent(mContext, CurFundInfoListActivity.class));
+                        break;
+
                     case 1:
                         startActivity(new Intent(mContext, XsContentListActivity.class));
                         break;

@@ -19,4 +19,10 @@ public interface UrlConstant {
 
     // 名称
     String URL_GENERATE_PERSON_NAME = URL_BASE + "/common/generateName/generatePersonName";
+
+
+
+    // ------------------------ 基金 begin ------------------------
+    String URL_GET_CUR_FUND_INFO = URL_BASE + "/fund/getCurFundInfo";
+    // ------------------------ 基金 end ------------------------
 }

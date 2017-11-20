@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 检测报告标题 -->
+    <string-array name="rep_cur_fund_info_items">
+        <item>可卖基金</item>
+        <item>可买基金</item>
+    </string-array>
+
+</resources>

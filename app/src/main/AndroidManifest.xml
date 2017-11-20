@@ -73,6 +73,10 @@
         <activity
             android:name="com.zwj.supertools.ui.activity.name.PersonNameActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.zwj.supertools.ui.activity.fund.CurFundInfoListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

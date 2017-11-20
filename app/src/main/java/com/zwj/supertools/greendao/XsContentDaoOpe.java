@@ -25,7 +25,7 @@ public class XsContentDaoOpe {
         if(obj.getCreateTime() == null) {
             obj.setCreateTime(new Date());
         }
-        return DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().insert(obj);
+        return DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().insert(obj);
     }
 
 
@@ -36,7 +36,7 @@ public class XsContentDaoOpe {
         if (!CommonUtil.isValidList(list)) {
             return;
         }
-        DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().insertInTx(list);
+        DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().insertInTx(list);
     }
 
     /**
@@ -44,42 +44,42 @@ public class XsContentDaoOpe {
      * 内部代码判断了如果存在就update(entity);不存在就insert(entity)；
      */
     public static void saveData(XsContent obj) {
-        DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().save(obj);
+        DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().save(obj);
     }
 
     /**
      * 删除数据至数据库
      */
     public static void deleteData(XsContent obj) {
-        DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().delete(obj);
+        DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().delete(obj);
     }
 
     /**
      * 根据id删除数据至数据库
      */
     public static void deleteByKeyData( String id) {
-        DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().deleteByKey(id);
+        DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().deleteByKey(id);
     }
 
     /**
      * 删除全部数据
      */
     public static void deleteAllData() {
-        DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().deleteAll();
+        DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().deleteAll();
     }
 
     /**
      * 更新数据库
      */
     public static void updateData(XsContent obj) {
-        DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().update(obj);
+        DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().update(obj);
     }
 
     /**
      * 查询所有数据
      */
     public static List<XsContent> queryAll() {
-        QueryBuilder<XsContent> builder = DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().queryBuilder();
+        QueryBuilder<XsContent> builder = DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().queryBuilder();
         return builder.build().list();
     }
 
@@ -87,7 +87,7 @@ public class XsContentDaoOpe {
      * 根据id，其他的字段类似
      */
     public static List<XsContent> queryForId(String id) {
-        QueryBuilder<XsContent> builder = DbManager.getDaoSession(MyApplication.getGlobalContext()).getXsContentDao().queryBuilder();
+        QueryBuilder<XsContent> builder = DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD).getXsContentDao().queryBuilder();
         /**
          * 返回当前id的数据集合,当然where(这里面可以有多组，做为条件);
          * 这里build.list()；与where(StudentDao.Properties.Id.eq(id)).list()结果是一样的；
@@ -109,11 +109,11 @@ public class XsContentDaoOpe {
      * 查询所有数据(异步)
      */
     public static void asyncQueryAll(AsyncOperationListener asyncOperationListener, Page page) {
-        AsyncSession async = DbManager.getDaoSession(MyApplication.getGlobalContext())
+        AsyncSession async = DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD)
                 .startAsyncSession();
         async.setListener(asyncOperationListener);
 
-        QueryBuilder<XsContent> builder = DbManager.getDaoSession(MyApplication.getGlobalContext())
+        QueryBuilder<XsContent> builder = DbManager.getDaoSession(MyApplication.getGlobalContext(), DbManager.DB_MY, DbManager.DB_MY_PASSWORD)
                 .getXsContentDao().queryBuilder();
 
         if(page != null) {

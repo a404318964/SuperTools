@@ -13,4 +13,7 @@
     <color name="wy_blue_press">#0189eb</color>
 
     <color name="theme_color">#0195ff</color>
+
+    <!--选项卡的颜色-->
+    <color name="tab_text_normal">#666666</color>
 </resources>

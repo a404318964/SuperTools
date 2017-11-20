@@ -1,7 +1,8 @@
 package com.zwj.supertools.greendao;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+
+import org.greenrobot.greendao.database.Database;
 
 /**
  * Created by zwj on 2017/11/6.
@@ -10,29 +11,30 @@ import android.database.sqlite.SQLiteDatabase;
 public class DbManager {
 
     // 是否加密
-    public static final boolean ENCRYPTED = true;
+    public static final boolean ENCRYPTED = false;
 
-    private static final String DB_NAME = "my.db";
+    public static final String DB_MY = "my.db";
+    public static final String DB_MY_PASSWORD = "myPassword";
+
     private static DbManager mDbManager;
     private static DaoMaster.DevOpenHelper mDevOpenHelper;
     private static DaoMaster mDaoMaster;
     private static DaoSession mDaoSession;
 
-    private Context mContext;
+//    private Context mContext;
 
-    private DbManager(Context context) {
-        this.mContext = context;
+    private DbManager(Context context, String dbName, String passwprd) {
         // 初始化数据库信息
-        mDevOpenHelper = new DaoMaster.DevOpenHelper(context, DB_NAME);
-        getDaoMaster(context);
-        getDaoSession(context);
+        mDevOpenHelper = new DaoMaster.DevOpenHelper(context, dbName);
+        getDaoMaster(context, dbName, passwprd);
+        getDaoSession(context, dbName, passwprd);
     }
 
-    public static DbManager getInstance(Context context) {
+    public static DbManager getInstance(Context context, String dbName, String passwprd) {
         if (null == mDbManager) {
             synchronized (DbManager.class) {
                 if (null == mDbManager) {
-                    mDbManager = new DbManager(context);
+                    mDbManager = new DbManager(context, dbName, passwprd);
                 }
             }
         }
@@ -45,46 +47,49 @@ public class DbManager {
      * @param context
      * @return
      */
-    public static SQLiteDatabase getReadableDatabase(Context context) {
+    public static Database getReadableDatabase(Context context, String dbName, String passwprd) {
         if (null == mDevOpenHelper) {
-            getInstance(context);
+            getInstance(context, dbName, passwprd);
         }
-        return mDevOpenHelper.getReadableDatabase();
+        if (ENCRYPTED) {//加密
+            return mDevOpenHelper.getEncryptedReadableDb(passwprd);
+        } else {
+            return mDevOpenHelper.getReadableDb();
+        }
     }
 
     /**
      * 获取可写数据库
      *
      * @param context
+     * @param dbName
+     * @param passwprd
      * @return
      */
-    public static SQLiteDatabase getWritableDatabase(Context context) {
+    public static Database getWritableDatabase(Context context, String dbName, String passwprd) {
         if (null == mDevOpenHelper) {
-            getInstance(context);
+            getInstance(context, dbName, passwprd);
         }
-
-        return mDevOpenHelper.getWritableDatabase();
+        if (ENCRYPTED) {//加密
+            return mDevOpenHelper.getEncryptedWritableDb(passwprd);
+        } else {
+            return mDevOpenHelper.getWritableDb();
+        }
     }
 
     /**
      * 获取DaoMaster
-     * 判断是否存在数据库，如果没有则创建数据库
+     *
+     * @param context
+     * @param dbName
+     * @param passwprd
+     * @return
      */
-    public static DaoMaster getDaoMaster(Context context) {
-//        if (null == mDaoMaster) {
-//            synchronized (DbManager.class) {
-//                if (null == mDaoMaster) {
-//                    mDaoMaster = new DaoMaster(getWritableDatabase(context));
-//                }
-//            }
-//        }
-//        return mDaoMaster;
-
+    public static DaoMaster getDaoMaster(Context context, String dbName, String passwprd) {
         if (null == mDaoMaster) {
             synchronized (DbManager.class) {
                 if (null == mDaoMaster) {
-                    MyOpenHelper helper = new MyOpenHelper(context,DB_NAME,null);
-                    mDaoMaster = new DaoMaster(helper.getWritableDatabase());
+                    mDaoMaster = new DaoMaster(getWritableDatabase(context, dbName, passwprd));
                 }
             }
         }
@@ -95,12 +100,15 @@ public class DbManager {
      * 获取DaoSession
      *
      * @param context
+     * @param dbName
+     * @param passwprd
      * @return
      */
-    public static DaoSession getDaoSession(Context context) {
+    public static DaoSession getDaoSession(Context context, String dbName, String passwprd) {
         if (null == mDaoSession) {
             synchronized (DbManager.class) {
-                mDaoSession = getDaoMaster(context).newSession();
+//                mDaoSession = getDaoMaster(context,dbName,passwprd).newSession();
+                mDaoSession = getDaoMaster(context, dbName, passwprd).newDevSession(context, dbName);
             }
         }
 
