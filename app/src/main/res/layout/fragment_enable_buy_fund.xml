@@ -5,19 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/rv"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="30px"-->
-    <!--android:layout_marginRight="30px">-->
-
-    <!--</android.support.v7.widget.RecyclerView>-->
-
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="可买"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px">
 
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

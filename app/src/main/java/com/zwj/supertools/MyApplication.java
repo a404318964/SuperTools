@@ -18,6 +18,7 @@ import com.zwj.supertools.constant.NotifyConstant;
 import com.zwj.supertools.constant.UrlConstant;
 import com.zwj.supertools.constant.XSConstant;
 import com.zwj.supertools.greendao.XsContentDaoOpe;
+import com.zwj.supertools.ui.activity.fund.CurFundInfoListActivity;
 import com.zwj.supertools.ui.activity.xs.XsContentActivity;
 import com.zwj.zwjutils.DateUtil;
 import com.zwj.zwjutils.FileUtils;
@@ -110,10 +111,17 @@ public class MyApplication extends Application {
             public void dealWithCustomAction(Context context, UMessage msg) {
                 LogUtils.i("notificationClickHandler", "msg.custom -----> "+msg.custom);
 
+                Intent intent = null;
                 switch (msg.custom) {
-                    case NotifyConstant.TYPE_OPEN_XS_CONTENT:
-                        Intent intent = new Intent(MyApplication.getGlobalContext(), XsContentActivity.class);
+                    case NotifyConstant.PUSH_TYPE_OPEN_XS_CONTENT:
+                        intent = new Intent(MyApplication.getGlobalContext(), XsContentActivity.class);
                         intent.putExtra(XSConstant.CONTENT_ID, msg.extra.get(XSConstant.CONTENT_ID));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        break;
+
+                    case NotifyConstant.PUSH_TYPE_FUND:
+                        intent = new Intent(MyApplication.getGlobalContext(), CurFundInfoListActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         break;
@@ -126,19 +134,23 @@ public class MyApplication extends Application {
             @Override
             public Notification getNotification(Context context, UMessage msg) {
 
-                // 收到段落推送后将其添加到数据库
-                String contentId = msg.extra.get(XSConstant.CONTENT_ID);
-                String pushTime = msg.extra.get(NotifyConstant.PUSH_TIME);
-                if(!TextUtils.isEmpty(contentId)) {
-                    new RequestBean(UrlConstant.URL_GET_XS_CONTENT_BY_ID, RequestBean.METHOD_GET)
-                            .addParam("id", contentId)
-                            .setCallback(new ParseBeanCallBack<XsContent>(XsContent.class) {
-                                @Override
-                                public void onSuccess(ResponseBean responseBean, XsContent xsContent) {
-                                    xsContent.setCreateTime(DateUtil.str2Date(pushTime));
-                                    XsContentDaoOpe.insertData(xsContent);
-                                }
-                            }).request(MyApplication.getGlobalContext());
+                switch (msg.custom) {
+                    case NotifyConstant.PUSH_TYPE_OPEN_XS_CONTENT:
+                        // 收到段落推送后将其添加到数据库
+                        String contentId = msg.extra.get(XSConstant.CONTENT_ID);
+                        String pushTime = msg.extra.get(NotifyConstant.PUSH_TIME);
+                        if(!TextUtils.isEmpty(contentId)) {
+                            new RequestBean(UrlConstant.URL_GET_XS_CONTENT_BY_ID, RequestBean.METHOD_GET)
+                                    .addParam("id", contentId)
+                                    .setCallback(new ParseBeanCallBack<XsContent>(XsContent.class) {
+                                        @Override
+                                        public void onSuccess(ResponseBean responseBean, XsContent xsContent) {
+                                            xsContent.setCreateTime(DateUtil.str2Date(pushTime));
+                                            XsContentDaoOpe.insertData(xsContent);
+                                        }
+                                    }).request(MyApplication.getGlobalContext());
+                        }
+                        break;
                 }
 
 //                switch (msg.builder_id) {

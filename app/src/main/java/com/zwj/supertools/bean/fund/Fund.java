@@ -1,12 +1,15 @@
 package com.zwj.supertools.bean.fund;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by zwj on 2017/11/20.
  */
 
-public class Fund {
+public class Fund implements Parcelable{
     private String id;
 
     private String name;
@@ -155,5 +158,15 @@ public class Fund {
 
     public void setSellRateFlag(String sellRateFlag) {
         this.sellRateFlag = sellRateFlag == null ? null : sellRateFlag.trim();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

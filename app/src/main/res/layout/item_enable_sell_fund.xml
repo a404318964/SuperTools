@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="20px"
+    android:paddingRight="20px"
+    android:paddingTop="20px"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_fund_name"
+        style="@style/TextSize30AndColor333333Style"
+        android:text="name" />
+
+    <TextView
+        android:id="@+id/tv_sell_count"
+        style="@style/TextSize30AndColor333333Style"
+        android:layout_alignParentRight="true"
+        android:text="123" />
+
+    <TextView
+        android:id="@+id/tv_current_price"
+        style="@style/TextSize30AndColor333333Style"
+        android:layout_below="@id/tv_fund_name"
+        android:layout_marginTop="10px"
+        android:text="1.23" />
+
+    <TextView
+        android:id="@+id/tv_cur_increase"
+        style="@style/TextSize30AndColor333333Style"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/tv_current_price"
+        android:text="1.23" />
+
+    <TextView
+        android:id="@+id/tv_reason"
+        style="@style/TextSize30AndColor333333Style"
+        android:layout_below="@id/tv_current_price"
+        android:layout_marginTop="10px"
+        android:text="xdfdfd" />
+
+    <View
+        style="@style/HorizontalLineViewStyle"
+        android:layout_below="@id/tv_reason"
+        android:layout_marginTop="20px"/>
+
+</RelativeLayout>
