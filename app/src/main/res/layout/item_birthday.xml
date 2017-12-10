@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="44px"
+    android:paddingRight="44px"
+    android:paddingTop="30px">
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/TextSize36AndColor333333Style"
+        android:text="liuwu"/>
+
+    <TextView
+        android:id="@+id/tv_age"
+        style="@style/TextSize36AndColor333333Style"
+        android:layout_alignParentRight="true"
+        android:text="24"/>
+
+    <TextView
+        android:id="@+id/tv_birthday"
+        style="@style/TextSize36AndColor333333Style"
+        android:layout_below="@id/tv_name"
+        android:layout_marginTop="22px"
+        android:text="阳历生日:2017-11-11"/>
+
+    <View
+        style="@style/HorizontalLineViewStyle"
+        android:layout_below="@id/tv_birthday"
+        android:layout_marginTop="30px"/>
+
+</RelativeLayout>

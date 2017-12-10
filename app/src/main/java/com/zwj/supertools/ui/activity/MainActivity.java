@@ -15,6 +15,7 @@ import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zwj.supertools.R;
 import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
+import com.zwj.supertools.ui.activity.fperson.FPersonBirthdayListActivity;
 import com.zwj.supertools.ui.activity.fund.CurFundInfoListActivity;
 import com.zwj.supertools.ui.activity.name.NameActivity;
 import com.zwj.supertools.ui.activity.xs.XsContentListActivity;
@@ -44,6 +45,7 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
         menuList.add("基金");
         menuList.add("小说");
         menuList.add("名称生成");
+        menuList.add("Person");
 
         CommonAdapter<String> adapter = new CommonAdapter<String>(mContext, R.layout.item_main_menu, menuList) {
             @Override
@@ -77,6 +79,10 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
 
                     case 2:
                         startActivity(new Intent(mContext, NameActivity.class));
+                        break;
+
+                    case 3:
+                        startActivity(new Intent(mContext, FPersonBirthdayListActivity.class));
                         break;
                 }
             }
