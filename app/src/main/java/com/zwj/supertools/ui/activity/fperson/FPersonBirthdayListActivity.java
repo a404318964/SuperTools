@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
 import com.zwj.customview.progress.ProgressBean;
 import com.zwj.customview.progress.ProgressUtil;
@@ -15,6 +16,7 @@ import com.zwj.supertools.bean.fperson.FPerson;
 import com.zwj.supertools.constant.UrlConstant;
 import com.zwj.supertools.ui.activity.base.BaseAutoLayoutCommonActivity;
 import com.zwj.supertools.ui.adapter.fperson.BirthdayAdapter;
+import com.zwj.zwjutils.JsonUtil;
 import com.zwj.zwjutils.net.bean.RequestBean;
 import com.zwj.zwjutils.net.bean.ResponseBean;
 import com.zwj.zwjutils.net.callback.ParseListCallBack;
@@ -41,23 +43,28 @@ public class FPersonBirthdayListActivity extends BaseAutoLayoutCommonActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
 
-        new ProgressBean()
-                .setLoadingTip("获取数据中")
-                .startProgress(mContext);
+        String content = getIntent().getStringExtra("content");
+        if(!TextUtils.isEmpty(content)) {
+            refreshUI(JsonUtil.getObjects(content, FPerson.class));
+        }else {
+            new ProgressBean()
+                    .setLoadingTip("获取数据中")
+                    .startProgress(mContext);
 
-        new RequestBean(UrlConstant.URL_GET_4_BIRTHDAY, RequestBean.METHOD_GET)
-                .setCallback(new ParseListCallBack<FPerson>(FPerson.class) {
+            new RequestBean(UrlConstant.URL_GET_4_BIRTHDAY, RequestBean.METHOD_GET)
+                    .setCallback(new ParseListCallBack<FPerson>(FPerson.class) {
 
-                    @Override
-                    public void onSuccess(ResponseBean responseBean, List<FPerson> list) {
-                        refreshUI(list);
-                    }
+                        @Override
+                        public void onSuccess(ResponseBean responseBean, List<FPerson> list) {
+                            refreshUI(list);
+                        }
 
-                    @Override
-                    public void onFinished(ResponseBean responseBean) {
-                        ProgressUtil.hideProgress();
-                    }
-                }).request(MyApplication.getGlobalContext());
+                        @Override
+                        public void onFinished(ResponseBean responseBean) {
+                            ProgressUtil.hideProgress();
+                        }
+                    }).request(MyApplication.getGlobalContext());
+        }
     }
 
     @Override

@@ -2,10 +2,11 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -27,13 +28,13 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-def supportVersion = "26.1.0";
+def supportVersion = "27.0.1";
 
 project.ext {
     applicationId = "com.zwj.supertools"
-    buildToolsVersion = "26.0.2"
-    compileSdkVersion = 26
-    minSdkVersion = 14
+    buildToolsVersion = "27.0.3"
+    compileSdkVersion = 27
+    minSdkVersion = 18
     targetSdkVersion = 22
     versionCode = 1
     versionName = "v1.0"

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
@@ -18,6 +19,7 @@ import com.zwj.supertools.constant.NotifyConstant;
 import com.zwj.supertools.constant.UrlConstant;
 import com.zwj.supertools.constant.XSConstant;
 import com.zwj.supertools.greendao.XsContentDaoOpe;
+import com.zwj.supertools.ui.activity.fperson.FPersonBirthdayListActivity;
 import com.zwj.supertools.ui.activity.fund.CurFundInfoListActivity;
 import com.zwj.supertools.ui.activity.xs.XsContentActivity;
 import com.zwj.zwjutils.DateUtil;
@@ -57,11 +59,8 @@ public class MyApplication extends Application {
         //注册全局一场捕获
 //        Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler(getApplicationContext()));
 
-        // 禁止默认的页面统计方式，这样将不会再自动统计Activity
-        MobclickAgent.openActivityDurationTrack(false);
-        // 日志加密
-        MobclickAgent.enableEncrypt(true);
-        MobclickAgent.setCatchUncaughtExceptions(true);
+        initUMeng();
+
 
         ImageBuilder.globalDefaultImgId = R.drawable.ic_default_device_image;
         ImageBuilder.globalDefaultErrorImgId = R.drawable.ic_default_device_image;
@@ -123,6 +122,14 @@ public class MyApplication extends Application {
                     case NotifyConstant.PUSH_TYPE_FUND:
                         intent = new Intent(MyApplication.getGlobalContext(), CurFundInfoListActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        break;
+
+                    case NotifyConstant.PUSH_TYPE_BIRTHDAY:
+                        String content = msg.extra.get("content");
+                        intent = new Intent(MyApplication.getGlobalContext(), FPersonBirthdayListActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("content", content);
                         startActivity(intent);
                         break;
                 }
@@ -221,5 +228,22 @@ public class MyApplication extends Application {
         RequestBean.callbackUnlogin = true;
         setGlobalParamAndHeader();
         ResponseConstant.TAG_CODE = "code";
+    }
+
+    private void initUMeng() {
+        //设置LOG开关，默认为false
+        UMConfigure.setLogEnabled(true);
+//        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "3e9af2616cf3e4e348af0be173ac12ab");
+        UMConfigure.init(this, "59dccfb7310c930e99000bbd", "zwj", UMConfigure.DEVICE_TYPE_PHONE,
+                "3e9af2616cf3e4e348af0be173ac12ab");
+
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+
+        // 禁止默认的页面统计方式，这样将不会再自动统计Activity
+        MobclickAgent.openActivityDurationTrack(false);
+
+        // 日志加密
+        UMConfigure.setEncryptEnabled(true);
     }
 }

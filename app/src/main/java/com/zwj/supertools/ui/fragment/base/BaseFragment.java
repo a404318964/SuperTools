@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zwj.zwjutils.LogUtils;
 import com.zwj.zwjutils.ToastUtil;
 
@@ -70,14 +71,14 @@ public abstract class BaseFragment extends Fragment {
     public void onResume() {
         super.onResume();
         LogUtils.d(TAG, TAG + " onResume");
-//        MobclickAgent.onPageStart(TAG); //统计页面
+        MobclickAgent.onPageStart(TAG); //统计页面
     }
 
     @Override
     public void onPause() {
         super.onPause();
         LogUtils.d(TAG, TAG + " onPause");
-//        MobclickAgent.onPageEnd(TAG);
+        MobclickAgent.onPageEnd(TAG);
     }
 
     @Override

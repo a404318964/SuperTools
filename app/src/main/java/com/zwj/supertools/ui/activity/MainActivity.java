@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -100,5 +101,9 @@ public class MainActivity extends BaseAutoLayoutCommonActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        MobclickAgent.onKillProcess(this);
+        finish();
+    }
 }
