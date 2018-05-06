@@ -65,9 +65,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile project(':PushSDK')
+//    compile project(':PushSDK')
 
-    compile 'com.github.a404318964.ZhuangwjUtils:customview:1.3.40'
+    compile 'com.github.a404318964.ZhuangwjUtils:customview:1.3.41'
 //
 //    // 内存泄露检测
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
@@ -79,6 +79,15 @@ dependencies {
     // 友盟
     compile 'com.umeng.sdk:common:latest.integration'
     compile 'com.umeng.sdk:analytics:latest.integration'
+
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+    compile 'com.umeng.sdk:utdid:1.1.5.3'
+    //PushSDK
+    compile 'com.umeng.sdk:push:4.1.0'
+
+    //小米Push通道
+    compile 'com.umeng.sdk:push-xiaomi:1.0.0'
+
 //    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 
     compile 'org.greenrobot:greendao:3.2.2'

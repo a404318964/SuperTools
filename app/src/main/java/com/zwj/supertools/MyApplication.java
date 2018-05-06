@@ -10,6 +10,7 @@ import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.MsgConstant;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.UmengNotificationClickHandler;
@@ -33,6 +34,7 @@ import com.zwj.zwjutils.net.callback.ParseBeanCallBack;
 import com.zwj.zwjutils.net.constant.Constant;
 import com.zwj.zwjutils.net.constant.ResponseConstant;
 
+import org.android.agoo.xiaomi.MiPushRegistar;
 import org.xutils.x;
 
 public class MyApplication extends Application {
@@ -75,26 +77,91 @@ public class MyApplication extends Application {
 
 //        LogUtils.logLevel = 0;
 
+        initUpush();
+    }
+
+    public static MyApplication getGlobalContext() {
+        return gApp;
+    }
+
+    /**
+     * 设置全局需要传给后台的参数和header
+     */
+    public static void setGlobalParamAndHeader() {
+        RequestBean.clearGlobalMap();
+        // 添加token
+        if (!TextUtils.isEmpty(getToken())) {
+            RequestBean.addGlobalHead(Constant.TOKEN, getToken());
+        }
+    }
+
+    private static String token;
+
+    public static String getToken() {
+        if (token == null) {
+            token = FileUtils.loadContentFromExternalFilesDir(gApp, Constant.FILE_TOKEN);
+        }
+        return token;
+    }
+
+    public static void setToken(String token) {
+        MyApplication.token = token;
+        if (TextUtils.isEmpty(token)) {
+            FileUtils.deleteFileFromExternalFilesDir(gApp, Constant.FILE_TOKEN);
+        } else {
+            FileUtils.saveFile2ExternalFilesDir(gApp, Constant.FILE_TOKEN, token.getBytes());
+        }
+
+        setGlobalParamAndHeader();
+    }
+
+    /**
+     * 初始化网络框架配置
+     */
+    private void initNetConfig() {
+        RequestBean.callbackUnlogin = true;
+        setGlobalParamAndHeader();
+        ResponseConstant.TAG_CODE = "code";
+    }
+
+    private void initUMeng() {
+        //设置LOG开关，默认为false
+        UMConfigure.setLogEnabled(true);
+//        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "3e9af2616cf3e4e348af0be173ac12ab");
+        UMConfigure.init(this, "59dccfb7310c930e99000bbd", "zwj", UMConfigure.DEVICE_TYPE_PHONE,
+                "3e9af2616cf3e4e348af0be173ac12ab");
+
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+
+        // 禁止默认的页面统计方式，这样将不会再自动统计Activity
+        MobclickAgent.openActivityDurationTrack(false);
+
+        // 日志加密
+        UMConfigure.setEncryptEnabled(true);
+    }
+
+    private void initUpush() {
         //请勿在调用register方法时做进程判断处理（主进程和channel进程均需要调用register方法才能保证长连接的正确建立）。
         PushAgent mPushAgent = PushAgent.getInstance(this);
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
-                //注册推送服务，每次调用register方法都会回调该接口
-                mPushAgent.register(new IUmengRegisterCallback() {
+        //注册推送服务，每次调用register方法都会回调该接口
+        mPushAgent.register(new IUmengRegisterCallback() {
 
-                    @Override
-                    public void onSuccess(String deviceToken) {
-                        //注册成功会返回device token
-                        LogUtils.i("App", "deviceToken --> " + deviceToken);
-                    }
+            @Override
+            public void onSuccess(String deviceToken) {
+                //注册成功会返回device token
+                LogUtils.i("App", "deviceToken --> " + deviceToken);
+            }
 
-                    @Override
-                    public void onFailure(String s, String s1) {
-                        LogUtils.i("App", "s --> " + s);
-                        LogUtils.i("App", "s1 --> " + s1);
-                    }
-                });
+            @Override
+            public void onFailure(String s, String s1) {
+                LogUtils.i("App", "s --> " + s);
+                LogUtils.i("App", "s1 --> " + s1);
+            }
+        });
 //            }
 //        }).start();
 
@@ -102,6 +169,17 @@ public class MyApplication extends Application {
 //        mPushAgent.setDebugMode(false);
 
         mPushAgent.setDisplayNotificationNumber(0);
+
+        //sdk开启通知声音
+        mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SDK_ENABLE);
+        // sdk关闭通知声音
+        // mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SDK_DISABLE);
+        // 通知声音由服务端控制
+        // mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SERVER);
+
+        // mPushAgent.setNotificationPlayLights(MsgConstant.NOTIFICATION_PLAY_SDK_DISABLE);
+        // mPushAgent.setNotificationPlayVibrate(MsgConstant.NOTIFICATION_PLAY_SDK_DISABLE);
+
 
         // 处理推送自定义行为
         UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
@@ -178,72 +256,55 @@ public class MyApplication extends Application {
 //
 //                        return builder.getNotification();
 //                    default:
-                        //默认为0，若填写的builder_id并不存在，也使用默认。
-                        return super.getNotification(context, msg);
+                //默认为0，若填写的builder_id并不存在，也使用默认。
+                return super.getNotification(context, msg);
 //                }
             }
+
+//            /**
+//             * 通知的回调方法（通知送达时会回调）
+//             */
+//            @Override
+//            public void dealWithNotificationMessage(Context context, UMessage msg) {
+//                //调用super，会展示通知，不调用super，则不展示通知。
+//                super.dealWithNotificationMessage(context, msg);
+//            }
+//
+//            /**
+//             * 自定义消息的回调方法
+//             */
+//            @Override
+//            public void dealWithCustomMessage(final Context context, final UMessage msg) {
+//
+//                handler.post(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        // TODO Auto-generated method stub
+//                        // 对自定义消息的处理方式，点击或者忽略
+//                        boolean isClickOrDismissed = true;
+//                        if (isClickOrDismissed) {
+//                            //自定义消息的点击统计
+//                            UTrack.getInstance(getApplicationContext()).trackMsgClick(msg);
+//                        } else {
+//                            //自定义消息的忽略统计
+//                            UTrack.getInstance(getApplicationContext()).trackMsgDismissed(msg);
+//                        }
+//                        Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//            }
         };
         mPushAgent.setMessageHandler(messageHandler);
-    }
 
-    public static MyApplication getGlobalContext() {
-        return gApp;
-    }
+        //使用完全自定义处理
+        //mPushAgent.setPushIntentServiceClass(UmengNotificationService.class);
 
-    /**
-     * 设置全局需要传给后台的参数和header
-     */
-    public static void setGlobalParamAndHeader() {
-        RequestBean.clearGlobalMap();
-        // 添加token
-        if (!TextUtils.isEmpty(getToken())) {
-            RequestBean.addGlobalHead(Constant.TOKEN, getToken());
-        }
-    }
-
-    private static String token;
-
-    public static String getToken() {
-        if (token == null) {
-            token = FileUtils.loadContentFromExternalFilesDir(gApp, Constant.FILE_TOKEN);
-        }
-        return token;
-    }
-
-    public static void setToken(String token) {
-        MyApplication.token = token;
-        if (TextUtils.isEmpty(token)) {
-            FileUtils.deleteFileFromExternalFilesDir(gApp, Constant.FILE_TOKEN);
-        } else {
-            FileUtils.saveFile2ExternalFilesDir(gApp, Constant.FILE_TOKEN, token.getBytes());
-        }
-
-        setGlobalParamAndHeader();
-    }
-
-    /**
-     * 初始化网络框架配置
-     */
-    private void initNetConfig() {
-        RequestBean.callbackUnlogin = true;
-        setGlobalParamAndHeader();
-        ResponseConstant.TAG_CODE = "code";
-    }
-
-    private void initUMeng() {
-        //设置LOG开关，默认为false
-        UMConfigure.setLogEnabled(true);
-//        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "3e9af2616cf3e4e348af0be173ac12ab");
-        UMConfigure.init(this, "59dccfb7310c930e99000bbd", "zwj", UMConfigure.DEVICE_TYPE_PHONE,
-                "3e9af2616cf3e4e348af0be173ac12ab");
-
-        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-
-
-        // 禁止默认的页面统计方式，这样将不会再自动统计Activity
-        MobclickAgent.openActivityDurationTrack(false);
-
-        // 日志加密
-        UMConfigure.setEncryptEnabled(true);
+        //小米通道
+        MiPushRegistar.register(this, "2882303761517784939", "5611778474939");
+        //华为通道
+        //HuaWeiRegister.register(this);
+        //魅族通道
+        //MeizuRegister.register(this, MEIZU_APPID, MEIZU_APPKEY);
     }
 }
