@@ -88,6 +88,9 @@ dependencies {
     //小米Push通道
     compile 'com.umeng.sdk:push-xiaomi:1.0.0'
 
+    //华为Push通道
+    compile 'com.umeng.sdk:push-huawei:1.0.0'
+
 //    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 
     compile 'org.greenrobot:greendao:3.2.2'

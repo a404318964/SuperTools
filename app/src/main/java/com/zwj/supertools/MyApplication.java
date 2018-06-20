@@ -34,6 +34,7 @@ import com.zwj.zwjutils.net.callback.ParseBeanCallBack;
 import com.zwj.zwjutils.net.constant.Constant;
 import com.zwj.zwjutils.net.constant.ResponseConstant;
 
+import org.android.agoo.huawei.HuaWeiRegister;
 import org.android.agoo.xiaomi.MiPushRegistar;
 import org.xutils.x;
 
@@ -303,7 +304,7 @@ public class MyApplication extends Application {
         //小米通道
         MiPushRegistar.register(this, "2882303761517784939", "5611778474939");
         //华为通道
-        //HuaWeiRegister.register(this);
+        HuaWeiRegister.register(this);
         //魅族通道
         //MeizuRegister.register(this, MEIZU_APPID, MEIZU_APPKEY);
     }
